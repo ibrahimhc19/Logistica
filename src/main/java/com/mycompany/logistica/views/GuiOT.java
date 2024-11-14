@@ -257,15 +257,29 @@ public class GuiOT extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         Orden orden = new Orden();
-//        orden.RegistrarOrden(txtProducto, txtCantidad, txtFechaRegistro, txtFechaEntrega, txtBodegaEntrega, txtPrecio);
+        orden.RegistrarOrden();
+        orden.ListarOrdenes();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void tbOrdenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        Orden orden = new Orden();
+        orden.EliminarOrden();
+        orden.SeleccionarOrden();
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
+        Orden orden = new Orden();
+        orden.ActualizarOrden();
+        orden.ListarOrdenes();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        Orden orden = new Orden();
+        orden.EliminarOrden();
+        orden.ListarOrdenes();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
