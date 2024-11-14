@@ -37,24 +37,42 @@ CREATE TABLE `clientes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ordenes`
+-- Table structure for table `terrestre`
 --
 
-CREATE TABLE `ordenes` (
+CREATE TABLE `terrestre` (
   `id` int(11) NOT NULL,
   `tipo_de_producto` varchar(100) DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `fecha_de_registro` date DEFAULT NULL,
   `fecha_de_entrega` date DEFAULT NULL,
   `bodega_de_entrega` varchar(100) DEFAULT NULL,
-  `puerto_de_entrega` varchar(100) DEFAULT NULL,
   `precio_de_envio` decimal(10,2) DEFAULT NULL,
   `placa_del_vehiculo` varchar(10) DEFAULT NULL,
+  `numero_de_guia` varchar(50) DEFAULT NULL,
+  `cliente` varchar(100) DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `maritima`
+--
+
+CREATE TABLE `maritima` (
+  `id` int(11) NOT NULL,
+  `tipo_de_producto` varchar(100) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `fecha_de_registro` date DEFAULT NULL,
+  `fecha_de_entrega` date DEFAULT NULL,
+  `puerto_de_entrega` varchar(100) DEFAULT NULL,
+  `precio_de_envio` decimal(10,2) DEFAULT NULL,
   `numero_de_flota` varchar(10) DEFAULT NULL,
   `numero_de_guia` varchar(50) DEFAULT NULL,
   `cliente` varchar(100) DEFAULT NULL,
-  `tipo_de_transporte` enum('Marítimo','Terrestre') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Indexes for dumped tables

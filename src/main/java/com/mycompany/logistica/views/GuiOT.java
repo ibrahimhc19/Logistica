@@ -257,7 +257,7 @@ public class GuiOT extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         Orden orden = new Orden();
-        orden.RegistrarOrden();
+        orden.RegistrarOrden(txtProducto, txtCantidad, txtFechaRegistro, txtFechaEntrega, txtBodegaEntrega, txtPrecio, txtPlaca, txtNumeroGuia, txtCliente);
         orden.ListarOrdenes();
     }//GEN-LAST:event_btnGuardarActionPerformed
 

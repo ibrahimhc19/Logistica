@@ -22,7 +22,6 @@ public class Orden {
     protected double precioEnvio;
     protected String numeroGuia;
     protected String cliente;
-    protected String tipoTransporte;
     protected Conexion con;
 
     public Orden() {
@@ -39,9 +38,7 @@ public class Orden {
         setFechaEntrega(new Date());
         setLugarEntrega(lugarE.getText());
         setPrecioEnvio(precioInt);
-        
-        
-        String sql = "INSER INTO transporte (tipoProducto,cantidadProducto,fechaRegistro,fechaEntrega,lugarEntrega,precioEnvio,tipo) VALUES (this.tipoProducto, this.cantidadProductos, this.fechaRegistro, this.fechaEntrega, this.lugarEntrega, this.precioEnvio)";
+
     }
     
     protected String validarNumeroGuia(String numeroGuia) {
@@ -52,51 +49,5 @@ public class Orden {
         return numeroGuia;
     }
     
-        public String getTipoProducto() {
-        return tipoProducto;
-    }
 
-    public void setTipoProducto(String tipoProducto) {
-        this.tipoProducto = tipoProducto;
-    }
-
-    public int getCantidadProducto() {
-        return cantidadProducto;
-    }
-
-    public void setCantidadProducto(int cantidadProducto) {
-        this.cantidadProducto = cantidadProducto;
-    }
-
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public Date getFechaEntrega() {
-        return fechaEntrega;
-    }
-
-    public void setFechaEntrega(Date fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
-    }
-
-    public String getLugarEntrega() {
-        return lugarEntrega;
-    }
-
-    public void setLugarEntrega(String lugarEntrega) {
-        this.lugarEntrega = lugarEntrega;
-    }
-
-    public double getPrecioEnvio() {
-        return precioEnvio;
-    }
-
-    public void setPrecioEnvio(double precioEnvio) {
-        this.precioEnvio = precioEnvio;
-    }
 }
