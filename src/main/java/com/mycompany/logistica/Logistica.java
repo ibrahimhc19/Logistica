@@ -1,54 +1,33 @@
 package com.mycompany.logistica;
-
 import com.mycompany.logistica.config.Conexion;
-import static com.mycompany.logistica.config.Conexion.getConnection;
-import com.mycompany.logistica.views.GuiOM;
-import com.mycompany.logistica.views.GuiOT;
-import java.sql.Connection;
+import com.mycompany.logistica.views.MenuInicio;
+
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.sql.Connection;
 
-
-/**
- *
- * @author Ibrahim Calzadilla
- */
 public class Logistica {
 
+
+    private static final String TITULO_MENU = "Seleccione su opción";
+    private static final String MENSAJE_ERROR_CONEXION = "Error de conexión con la base de datos";
+    private static final String TITULO_ERROR = "Error de conexión";
+
     public static void main(String[] args) {
-        
-        
-        Connection connection = getConnection();
-        
-        if(connection != null){  
-        
-        
-        String[] opciones = {"Terrestre", "Marítimo"};
-          GuiOT pantallaT = new GuiOT();
-          GuiOM pantallaM = new GuiOM();
-        
-       
-        // Mostrar el JOptionPane con las dos opciones
-        String opcionSeleccionada = (String) JOptionPane.showInputDialog(null, "Selecciona el tipo de orden a registrar:", "Registro de Ordenes", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-        
-        if (opcionSeleccionada == null) {
-            JOptionPane.showMessageDialog(null, "Ha cancelado el registro", "Error", JOptionPane.ERROR_MESSAGE);
+        // Intentar obtener la conexión
+        Connection connection = Conexion.getConnection();
+
+        // Si la conexión es nula, mostrar el mensaje de error
+        if (connection == null) {
+            JOptionPane.showMessageDialog(null, MENSAJE_ERROR_CONEXION, TITULO_ERROR, JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-        
-        if(opcionSeleccionada == "Terrestre"){
-          pantallaT.setTitle("Registro Orden Terrestre");
-          pantallaT.setTxtEnvio("Terrestre");
-          pantallaT.setVisible(true);
-          pantallaT.setLocationRelativeTo(null);
-            
-        }
-        if(opcionSeleccionada == "Marítimo"){
-          pantallaM.setTitle("Registro Orden Marítima");
-          pantallaM.setTxtEnvio("Marítimo");
-          pantallaM.setVisible(true);
-          pantallaM.setLocationRelativeTo(null);
-            
-        }
-         } 
+
+        // Si la conexión fue exitosa, mostrar el menú
+        MenuInicio menu = new MenuInicio();
+        menu.setTitle(TITULO_MENU);
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+        menu.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 }

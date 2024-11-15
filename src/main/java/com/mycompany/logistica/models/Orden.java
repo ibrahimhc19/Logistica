@@ -24,20 +24,17 @@ public class Orden {
     protected String cliente;
     protected Conexion con;
 
-    public Orden() {
-        this.con = new Conexion();
-    }
     
     public void RegistrarOrden(JTextField tipoP, JTextField cantidad, JTextField fechaR, JTextField fechaE, JTextField lugarE, JTextField precio){
         
         int cantidadInt = Integer.parseInt(cantidad.getText());
         int precioInt = Integer.parseInt(precio.getText());
-        setTipoProducto(tipoP.getText());
-        setCantidadProducto(cantidadInt);
-        setFechaRegistro(new Date());
-        setFechaEntrega(new Date());
-        setLugarEntrega(lugarE.getText());
-        setPrecioEnvio(precioInt);
+//        setTipoProducto(tipoP.getText());
+//        setCantidadProducto(cantidadInt);
+//        setFechaRegistro(new Date());
+//        setFechaEntrega(new Date());
+//        setLugarEntrega(lugarE.getText());
+//        setPrecioEnvio(precioInt);
 
     }
     
