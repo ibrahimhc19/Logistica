@@ -45,10 +45,41 @@ public class Cliente {
         }
     }
     
-    public void MostrarClientes(JTable listadoClientes){
-        
-        
+public void MostrarClientes(JTable listadoClientes) {
+
+    String[] columnas = {"ID", "Nombre", "Apellido", "Teléfono", "Correo", "Dirección"};
+    DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+
+    String sql = "SELECT id_cliente, nombre, apellido, telefono, correo, direccion FROM clientes";
+
+    try (PreparedStatement ps = conexion.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        // Llenar el modelo con los datos obtenidos de la consulta
+        while (rs.next()) {
+            Object[] fila = {
+                rs.getInt("id_cliente"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getString("telefono"),
+                rs.getString("correo"),
+                rs.getString("direccion")
+            };
+            modelo.addRow(fila); // Agregar la fila al modelo
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al mostrar los clientes: " + e.getMessage());
     }
+
+    // Asignar el modelo al JTable
+    listadoClientes.setModel(modelo);
+
+    // Agregar funcionalidad de ordenamiento de filas
+    TableRowSorter<TableModel> ordenarTabla = new TableRowSorter<>(modelo);
+    listadoClientes.setRowSorter(ordenarTabla);
+}
+
     public void ActualizarCliente(){
         
     }
