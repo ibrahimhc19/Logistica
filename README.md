@@ -15,7 +15,7 @@ Voy a desarrollar una nueva solución siguiendo las instrucciones originales de 
 - Crear una **API REST** utilizando Java.
 - Implementar el **frontend** utilizando **Angular** o **React**.
 
-Puedes encontrar el enlace al nuevo repositorio con la solución correcta aquí: [Enlace al nuevo repositorio].
+Podrás encontrar el enlace al nuevo repositorio con la solución correcta aquí: [Enlace al nuevo repositorio].
 
 ---
 
