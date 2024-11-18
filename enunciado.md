@@ -1,4 +1,3 @@
-```markdown
 # Enunciado
 
 Una empresa de gestión logística terrestre que administra el transporte en camiones, al ser bastante exitosa, ha recibido en los últimos meses peticiones de empresas de transporte marítimo para agregar la logística marítima a sus servicios.
@@ -84,4 +83,3 @@ Estas funcionalidades no son requeridas pero ayudarán a evaluar el nivel de sen
 4. Artefactos de despliegue.
 5. Definición de buenas prácticas.
 6. Justificación de las tecnologías y patrones de diseño empleados.
-```
