@@ -1,10 +1,10 @@
 package com.mycompany.logistica.models;
 
 import java.sql.Connection;
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -60,19 +60,20 @@ public class Cliente {
         String sql = "SELECT id_cliente, nombre, apellido, telefono, correo, direccion FROM clientes";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
-
+            int idLista = 01;
+            DecimalFormat formato = new DecimalFormat("00");
             // Llenar el modelo con los datos obtenidos de la consulta
             while (rs.next()) {
-                Object[] fila = {
-                    rs.getInt("id_cliente"),
+                Object[] fila = {formato.format(idLista),
                     rs.getString("nombre"),
                     rs.getString("apellido"),
                     rs.getString("telefono"),
                     rs.getString("correo"),
                     rs.getString("direccion")
                 };
+                idLista++;
                 modelo.addRow(fila); // Agregar la fila al modelo
-            }
+            } 
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar los clientes: " + e.getMessage());
