@@ -1,6 +1,5 @@
 package com.mycompany.logistica.models;
 
-import java.util.Date;
 
 /**
  *
@@ -9,7 +8,6 @@ import java.util.Date;
 
 import com.mycompany.logistica.config.Conexion;
 import java.util.Date;
-import javax.swing.JTextField;
 
 public class Orden {
 
@@ -25,17 +23,7 @@ public class Orden {
     protected Conexion con;
 
     
-    public void RegistrarOrden(JTextField tipoP, JTextField cantidad, JTextField fechaR, JTextField fechaE, JTextField lugarE, JTextField precio){
-        
-        int cantidadInt = Integer.parseInt(cantidad.getText());
-        int precioInt = Integer.parseInt(precio.getText());
-//        setTipoProducto(tipoP.getText());
-//        setCantidadProducto(cantidadInt);
-//        setFechaRegistro(new Date());
-//        setFechaEntrega(new Date());
-//        setLugarEntrega(lugarE.getText());
-//        setPrecioEnvio(precioInt);
-
+    public void RegistrarOrden(){
     }
     
     protected String validarNumeroGuia(String numeroGuia) {
