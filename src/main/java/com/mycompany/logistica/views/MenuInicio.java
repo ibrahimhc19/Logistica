@@ -15,6 +15,7 @@ public class MenuInicio extends javax.swing.JFrame {
      */
     public MenuInicio() {
         initComponents();
+        
     }
 
     /**

@@ -3,7 +3,7 @@ package com.mycompany.logistica.views;
 import com.mycompany.logistica.config.Conexion;
 import com.mycompany.logistica.models.Cliente;
 import java.sql.Connection;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +16,7 @@ public class GuiClientes extends javax.swing.JFrame {
      */
     public GuiClientes() {
         initComponents();
+
     }
 
     /**
@@ -43,17 +44,15 @@ public class GuiClientes extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
+        btnLimpiar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
@@ -66,6 +65,8 @@ public class GuiClientes extends javax.swing.JFrame {
         jLabel5.setText("Teléfono");
 
         jLabel7.setText("Apellido");
+
+        txtId.setEditable(false);
 
         btnGuardar.setText("Guardar cliente");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,13 +91,14 @@ public class GuiClientes extends javax.swing.JFrame {
 
         jLabel1.setText("Correo");
 
-        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+        jLabel11.setText("Dirección");
+
+        btnLimpiar.setText("Limpiar campos");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
-
-        jLabel11.setText("Dirección");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,17 +123,17 @@ public class GuiClientes extends javax.swing.JFrame {
                             .addComponent(txtNombre)
                             .addComponent(txtId)
                             .addComponent(txtTelefono)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel11)
-                            .addGap(29, 29, 29)
-                            .addComponent(txtDireccion))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(29, 29, 29)
+                        .addComponent(txtDireccion))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -167,6 +169,8 @@ public class GuiClientes extends javax.swing.JFrame {
                 .addComponent(btnActualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLimpiar)
                 .addContainerGap())
         );
 
@@ -183,6 +187,11 @@ public class GuiClientes extends javax.swing.JFrame {
 
             }
         ));
+        tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbClientes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -227,43 +236,93 @@ public class GuiClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-        Connection connection = Conexion.getConnection();
-        Cliente cliente = new Cliente(connection);
-        cliente.RegistrarCliente(txtNombre.getText(), txtApellido.getText(), txtTelefono.getText(), txtCorreo.getText(), txtDireccion.getText());
-//        cliente.MostrarClientes(tbOrdenes);
+
+        if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty() || txtCorreo.getText().isEmpty() || txtDireccion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos");
+        } else if (txtId.getText().isEmpty() && !txtNombre.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtDireccion.getText().isEmpty()) {
+            Connection connection = Conexion.getConnection();
+            Cliente cliente = new Cliente(connection);
+            cliente.RegistrarCliente(txtNombre.getText(), txtApellido.getText(), txtTelefono.getText(), txtCorreo.getText(), txtDireccion.getText());
+            cliente.MostrarClientes(tbClientes);
+            this.btnLimpiarActionPerformed(evt);
+        }
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void tbClientesActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        Connection connection = Conexion.getConnection();
-        Cliente cliente = new Cliente(connection);
-        cliente.MostrarClientes(tbClientes);
 
     }
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
-
+            Connection connection = Conexion.getConnection();
+            Cliente cliente = new Cliente(connection);
+            cliente.ActualizarCliente(Integer.parseInt(txtId.getText()) ,txtNombre.getText(), txtApellido.getText(), txtTelefono.getText(), txtCorreo.getText(), txtDireccion.getText());
+            cliente.MostrarClientes(tbClientes);
+            this.btnLimpiarActionPerformed(evt);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+
+        String id = txtId.getText();
+        if (!id.isEmpty()) {
+            int idInt = Integer.parseInt(id);
+            Connection connection = Conexion.getConnection();
+            Cliente cliente = new Cliente(connection);
+            cliente.EliminarCliente(idInt);
+            cliente.MostrarClientes(tbClientes);
+            this.btnLimpiarActionPerformed(evt);
+        }
+
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un cliente a eliminar");
+        }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        Connection connection = Conexion.getConnection();
+        Cliente cliente = new Cliente(connection);
+        cliente.MostrarClientes(tbClientes);
+        if (txtId.getText().isEmpty()) {
+            btnActualizar.setEnabled(false);
+        }
 
-    }//GEN-LAST:event_formWindowClosed
+    }//GEN-LAST:event_formWindowActivated
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowClosing
+    private void tbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMouseClicked
 
-    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorreoActionPerformed
+        int fila = tbClientes.getSelectedRow();
+        String id = tbClientes.getValueAt(fila, 0).toString();
+        String nombre = (String) tbClientes.getValueAt(fila, 1);
+        String apellido = (String) tbClientes.getValueAt(fila, 2);
+        String telefono = (String) tbClientes.getValueAt(fila, 3);
+        String correo = (String) tbClientes.getValueAt(fila, 4);
+        String direccion = (String) tbClientes.getValueAt(fila, 5);
+        txtId.setText(id);
+        txtNombre.setText(nombre);
+        txtApellido.setText(apellido);
+        txtTelefono.setText(telefono);
+        txtCorreo.setText(correo);
+        txtDireccion.setText(direccion);
+
+        if (!txtId.getText().isEmpty()) {
+            btnGuardar.setEnabled(false);
+            btnActualizar.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_tbClientesMouseClicked
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtId.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        txtDireccion.setText("");
+        btnGuardar.setEnabled(true);
+        btnActualizar.setEnabled(false);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +332,7 @@ public class GuiClientes extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

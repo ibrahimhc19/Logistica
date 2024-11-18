@@ -8,6 +8,7 @@ com\mycompany\logistica\views\GuiClientes.class
 com\mycompany\logistica\models\Orden.class
 com\mycompany\logistica\views\GuiOM$4.class
 com\mycompany\logistica\views\GuiClientes$3.class
+com\mycompany\logistica\views\GuiClientes$6.class
 com\mycompany\logistica\views\GuiOT$5.class
 com\mycompany\logistica\views\MenuInicio.class
 com\mycompany\logistica\views\GuiOM$1.class
