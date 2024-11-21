@@ -7,23 +7,26 @@ package com.mycompany.logistica.models;
  */
 
 import com.mycompany.logistica.config.Conexion;
-import java.util.Date;
-
-public class Orden {
 
 
-    protected String tipoProducto;
+public abstract class Orden {
+
+    protected int idEnvio;
+    protected int idCliente;
+    protected String tipoDeProducto;
     protected int cantidadProducto;
-    protected Date fechaRegistro;
-    protected Date fechaEntrega;
-    protected String lugarEntrega;
-    protected double precioEnvio;
-    protected String numeroGuia;
-    protected String cliente;
-    protected Conexion con;
+    protected String fechaDeRegistro;
+    protected String fechaDeEntrega;
+    protected double precioDeEnvio;
+    protected String numeroDeGuia;
+    protected Connection conexion;
+
+    public Orden(Connection conexion){
+        this.conexion = conexion;
+    }
 
     
-    public void RegistrarOrden(){
+    public abstract void RegistrarOrden(){
     }
     
     protected String validarNumeroGuia(String numeroGuia) {
@@ -33,6 +36,17 @@ public class Orden {
         }
         return numeroGuia;
     }
-    
+
+    public static Orden obtenerPorTipo(String tipo, int idEnvio) {
+        if ("terrestre".equalsIgnoreCase(tipo)) {
+            return OrdenTerrestre.obtener(idEnvio);
+        } else if ("maritima".equalsIgnoreCase(tipo)) {
+            return OrdenMaritima.obtener(idEnvio);
+        } else {
+            throw new IllegalArgumentException("Tipo de orden no válido");
+        }
+    }
 
 }
+
+
